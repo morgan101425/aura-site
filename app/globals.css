@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   AURA — Design tokens & typographie
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --color-bg: 245 241 234;
+    --color-bg-raised: 239 234 224;
+    --color-ink: 26 24 21;
+    --color-accent: 229 90 31;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  /* Typographie display — Fraunces : optical sizing + italic expressif */
+  .font-display {
+    font-optical-sizing: auto;
+    font-variation-settings: 'SOFT' 0, 'WONK' 0;
+  }
+
+  .font-display-wonk {
+    font-variation-settings: 'SOFT' 50, 'WONK' 1;
+  }
+
+  /* Réglettes de section typographiques */
+  ::selection {
+    background-color: rgb(var(--color-accent) / 0.25);
+    color: rgb(var(--color-ink));
+  }
+
+  /* Scroll-behavior fluide pour les ancres */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Container standardisé */
+  .container-x {
+    @apply mx-auto w-full max-w-content px-6 md:px-10 lg:px-16;
+  }
+
+  /* Numérotation de section type éditorial */
+  .section-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted;
+  }
+
+  /* Bordure technique — trait fin */
+  .rule-line {
+    @apply border-t border-ink-line;
+  }
+
+  /* Bouton primaire */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+      bg-ink text-bg px-5 py-3
+      font-sans text-sm font-medium tracking-tight
+      transition-all duration-200
+      hover:bg-accent hover:text-bg
+      focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+      bg-transparent text-ink border border-ink px-5 py-3
+      font-sans text-sm font-medium tracking-tight
+      transition-all duration-200
+      hover:bg-ink hover:text-bg
+      focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2 focus:ring-offset-bg;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-1.5
+      font-sans text-sm text-ink-soft
+      transition-colors duration-200
+      hover:text-accent;
+  }
+
+  /* Blueprint badge — le petit tag technique en haut des sections */
+  .blueprint-tag {
+    @apply inline-flex items-center gap-2
+      font-mono text-[10px] uppercase tracking-[0.2em] text-accent
+      before:content-[''] before:block before:w-6 before:h-px before:bg-accent;
+  }
+
+  /* Underline animé pour les liens éditoriaux */
+  .link-editorial {
+    @apply relative text-ink transition-colors hover:text-accent;
+  }
+  .link-editorial::after {
+    content: '';
+    @apply absolute left-0 -bottom-0.5 h-px w-full bg-current
+      origin-right scale-x-0 transition-transform duration-300;
+  }
+  .link-editorial:hover::after {
+    @apply origin-left scale-x-100;
+  }
+}
+
+@layer utilities {
+  /* Texturage papier pour les fonds clairs */
+  .texture-paper {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(229,90,31,0.03), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(26,24,21,0.025), transparent 60%);
+  }
+
+  /* Traits de cotation décoratifs type blueprint */
+  .dim-corner::before,
+  .dim-corner::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: rgb(var(--color-ink));
+  }
+  .dim-corner::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .dim-corner::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  /* Balisage des révélations au scroll via animation-delay staggered */
+  .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+  .stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+  .stagger-children > *:nth-child(8) { animation-delay: 560ms; }
+}
