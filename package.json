@@ -1,6 +1,6 @@
 {
   "name": "aura-landing",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "Site de présentation d'AURA — supervision de chantier industriel",
   "scripts": {

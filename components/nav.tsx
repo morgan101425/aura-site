@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 ] as const;
 
 export function Nav() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -22,6 +24,10 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Sur la home, le Hero fournit sa propre navigation (TopRail + Masthead)
+  // On masque donc la Nav globale pour éviter la duplication.
+  if (pathname === '/') return null;
 
   return (
     <header
@@ -33,7 +39,6 @@ export function Nav() {
       )}
     >
       <div className="container-x flex h-16 items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="group flex items-baseline gap-2">
           <span className="font-display text-2xl font-semibold tracking-tight text-ink">
             AURA
@@ -43,7 +48,6 @@ export function Nav() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
@@ -56,7 +60,6 @@ export function Nav() {
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
         <div className="flex items-center gap-3">
           <Link
             href="/demander-demo"
@@ -74,7 +77,6 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <nav className="md:hidden border-t border-ink-line bg-bg">
           <div className="container-x flex flex-col gap-1 py-4">
