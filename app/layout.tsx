@@ -35,7 +35,7 @@ const jetbrains = JetBrains_Mono({
    -------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://aura-btp.com'),
+  metadataBase: new URL('https://aura-site-git-main-morgan101425s-projects.vercel.app'),
   title: {
     default: 'AURA — La supervision de chantier industriel, enfin au niveau',
     template: '%s · AURA',
@@ -58,7 +58,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://aura-btp.com',
     siteName: 'AURA',
     title: 'AURA — Supervision de chantier industriel',
     description:
